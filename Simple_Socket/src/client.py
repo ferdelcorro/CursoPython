@@ -2,7 +2,7 @@
 from socket import error
 from server.setting import *
 from socket import socket
-from client.tools import Recive
+from client.tools import Recive, Envia
 
 HOST = 'localhost'
 PORT = 6032
@@ -15,9 +15,10 @@ def main():
     #Abre la conexion con el server
     s.connect((HOST, PORT))
     #Recibe informacion del server
-    c = Recive(s, connected)
-    c.start()
-    c.join()
+    r = Recive(s, connected)
+    e = Envia(s, connected)
+    r.start()
+    e.start()
     """
     input_data = s.recv(1024)
     #Imprime la informacion recibida
