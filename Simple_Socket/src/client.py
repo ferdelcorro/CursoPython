@@ -4,8 +4,8 @@ from server.setting import *
 from socket import socket
 from client.tools import Recive, Envia
 
-HOST = 'tuxis-us-03.tuxis.com.ar'
-PORT = 6030
+HOST = '201.235.199.203'
+PORT = 6032
 
 connected = []
 
