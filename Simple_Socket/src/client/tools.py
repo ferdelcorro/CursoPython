@@ -9,14 +9,12 @@ class Recive(Thread):
         # Inicializar clase padre.
         Thread.__init__(self)
 
-        self.socket = socket
+        self.my_socket = socket
         self.connected = connected
 
     def run(self):
-        e = Envia(self.socket, self.connected)
-        e.start()
         while len(self.connected) == 0:
-            input_data = self.socket.recv(1024)
+            input_data = self.my_socket.recv(1024)
             if input_data:
                 print input_data
 
@@ -27,7 +25,7 @@ class Envia(Thread):
         # Inicializar clase padre.
         Thread.__init__(self)
 
-        self.socket = socket
+        self.my_socket = socket
         self.connected = connected
 
     def run(self):
@@ -37,10 +35,10 @@ class Envia(Thread):
             if output_data:
                 try:
                     #Envia la informacion
-                    self.socket.send(output_data)
+                    self.my_socket.send(output_data)
                 except TypeError:
                     #En caso de dar error por caracteres se hace una convercion
-                    self.socket.send(bytes(output_data, "utf-8"))
+                    self.my_socket.send(bytes(output_data, "utf-8"))
                 if output_data == '\quit':
                     self.connected.append('bye')
                     print 'bye'
